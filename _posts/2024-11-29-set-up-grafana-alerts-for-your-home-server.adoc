@@ -131,7 +131,7 @@ metadata:
     grafana_alert: "1" <1>
 data:
   contact-points.yaml: |
-    $(cat grafana-contact-points.yaml | base64)
+    $(cat grafana-contact-points.yaml | base64 -w 0)
 EOF
 ----
 <1> This label is needed for Grafana to recognise the resource.
