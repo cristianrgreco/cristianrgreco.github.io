@@ -12,7 +12,7 @@ In this series we're using Flux, but the same concepts and principals apply to o
 
 == The Problem(s)
 
-If you've worked in a DevOps environment (where the developers who write the code are also responsible for deploying it, supporting it, etc.), I'd bet money that your deployment process looks something like this:
+If you've worked in a DevOps environment (where the developers who write the code are also responsible for deploying it, supporting it, etc.), I'd bet that your deployment process looks something like this:
 
 [plantuml, format=svg]
 ----
