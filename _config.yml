@@ -20,9 +20,9 @@ author:
   location: London, UK
   name: Cristian Greco
   links:
-    - label: "Twitter"
-      icon: "fab fa-fw fa-x"
-      url: "https://x.com/cristianrgreco"
+#    - label: "Twitter"
+#      icon: "fab fa-fw fa-x"
+#      url: "https://x.com/cristianrgreco"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/cristianrgreco"

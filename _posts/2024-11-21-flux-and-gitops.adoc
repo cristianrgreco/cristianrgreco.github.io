@@ -45,16 +45,16 @@ return Release successful
 
 Beautiful, almost nostalgic. But there are a few problems with it:
 
-. What if the cluster wasn't in the state you expected it to be in?
-.. It's probably happened to you. You're doing a routine deployment, but the pipeline fails because the pods didn't reach a ready state. You check the deployment manifest, turns out your favourite colleague was testing stuff and added `replicas: 0` but forgot to take it back out (again). Or worse, the namespace you're deploying to no longer exists! 🔥
+. What if the cluster wasn't in the state you expected it to be in when you applied your change?
+.. It's probably happened to you. You're doing a routine deployment, but the pipeline fails because the pods didn't reach a ready state. You check the deployment manifest, turns out your favourite colleague was testing stuff and added `replicas: 0` but forgot to take it back out (again). Or worse, the namespace you're deploying to no longer exists!
 +
 . Now that the pipeline has failed and the cluster is in a failed state, what do you do?
-.. You had a fancy pipeline to abstract away and automate the whole deployment process, but now that you need to dive in you're stuck. Are you going to run `kubectl` commands against the cluster to see what's going on? Or run `kubectl delete deployment/<app>` to start fresh, and then re-run the pipeline? Hopefully you're not in an bridge call with 100 people watching your screen as you type `kubectl --help`. How __exactly__ do you rollback, what permissions do you need to do so, and then how do you __guarantee__ that the cluster is now in the state you expect it to be?
+.. You had a fancy pipeline to abstract away and automate the whole deployment process, but now that you need to dive in you're stuck. Are you going to run `kubectl` commands against the cluster to see what's going on? Or run `kubectl delete deployment/<app>` to start fresh, and then re-run the pipeline? Hopefully you're not in a bridge call with 100 people watching your screen as you type `kubectl --help`. How __exactly__ do you rollback, what permissions do you need to do so, and then how do you __guarantee__ that the cluster is now in the state you expect it to be, so this doesn't happen again?
 +
-. You've heard of SecOps and you wear the T-shirt with pride. You ignore your therapist when she says not to apply the Zero Trust Model to everyday life. I think part of you knows how insecure this process is but don't want to admit it.
-.. Not only does the CI/CD pipeline need write access to your cluster, but probably so does every developer on your team, because __when__ the pipeline fails, the cluster will require manual intervention to troubleshoot and fix. This means any successful phishing attack, or even a lost/stolen laptop, could spell game over.
+. You've heard of SecOps and you wear the T-shirt with pride. You ignore your therapist when she says not to apply the Zero Trust Model to everyday life. It should be clear to you how insecure this process is:
+.. Not only does the CI/CD pipeline need write access to your cluster, but probably so does every developer on your team, because __when__ the pipeline fails, the cluster will require manual intervention to troubleshoot and fix. This means any successful phishing attack, or even a lost/stolen laptop, could result in a compromised cluster.
 +
-. It's Friday evening and you've been called into an urgent meeting. "What is our DR?!" your manager shouts. Confused, you wonder if he's been drinking. "We probably see different doctors, boss".
+. It's Friday evening, the cluster is completely down, and you've been called into an urgent meeting with your manager. "Where is our DR?!" he shouts. Confused, you reply: "I didn't know we saw the same doctor!".
 .. Your cluster has disappeared. Most likely it was on Azure. You raise a platinum support ticket to get your money's worth but you know you're on your own. Now you're tasked with a rebuild. You'll need to duplicate/update all the CI/CD pipelines and monitoring/alerting rules. Create new service connections. Copy over (hopefully) existing manifests and configurations. Re-deploy all your applications (who knows what versions were actually live? It's definitely not written anywhere. You find the following pipeline code and your impostor syndrome climaxes: `sed -ie "s/IM_THE_VERSION_REPLACE_ME_LOL/$actualVersionLol/g" deployment.yml
 kubectl apply -f deployment.yml`).
 
@@ -80,7 +80,7 @@ Participant "Kubernetes Cluster" as Cluster
 Developer -> CGit: Push code defining what should be in the cluster
 return Pushed
 
-...Optional approval process...
+...Some time later...
 
 Developer -> Git: Push code
 return Pushed
