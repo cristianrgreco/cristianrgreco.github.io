@@ -139,13 +139,17 @@ spec:
 Let's see how this new process has solved the problems above:
 
 . What state is the cluster in?
-.. Explore the `main` branch of your Git repository.
++
+Explore the `main` branch of your Git repository.
 . How to get back to a given state?
-.. `git revert`.
++
+`git revert`.
 . Security?
-.. We've closed the cluster off from the outside world. Flux runs __within__ the cluster, with read-only egress to the Git repository. Developers and service accounts no longer need access.
++
+We've closed the cluster off from the outside world. Flux runs __within__ the cluster, with read-only egress to the Git repository. Developers and service accounts no longer need access.
 . Reproducibility?
-.. The entire cluster state is in code in Git. You can install Flux on any other cluster and have it bootstrap from the Git repository to get back to the exact same state.
++
+The entire cluster state is in code in Git. You can install Flux on any other cluster and have it bootstrap from the Git repository to get back to the exact same state.
 
 There are other benefits as well, like developers not needing to learn new tools or Kubernetes intricacies. Instead, they use an interface they're already familiar with: Git.
 
